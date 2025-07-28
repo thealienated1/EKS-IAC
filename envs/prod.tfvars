@@ -1,0 +1,9 @@
+environment = "prod"
+existing_vpc_id = "vpc-0684f1c17d1c46903"
+private_subnet_ids = ["subnet-048e8a9ff00499eaa", "subnet-0e0b7a79d7671206e"]
+public_subnet_ids = ["subnet-04c847a990b1036fc", "subnet-001a6178e08e7d8a3"]
+node_instance_types = ["m5.large"]
+node_desired_size = 3
+node_min_size = 3
+node_max_size = 6
+enable_public_access = false
