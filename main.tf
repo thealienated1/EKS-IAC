@@ -55,25 +55,24 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 21.0"
 
-  cluster_name                   = "${var.environment}-${var.cluster_name}"
-  cluster_version                = var.cluster_version
-  vpc_id                         = var.existing_vpc_id
-  subnet_ids                     = var.private_subnet_ids
+  name                   = "${var.environment}-${var.cluster_name}"
+  kubernetes_version      = var.cluster_version
+  subnet_ids             = var.private_subnet_ids
 
-  cluster_endpoint_public_access = var.enable_public_access
-  cluster_endpoint_private_access = true
+  endpoint_public_access = var.enable_public_access
+  endpoint_private_access = true
 
-  #Custom Cluster SG
-  cluster_security_group_id = aws_security_group.eks_cluster.id
+  # Custom Cluster SG
+  security_group_id = aws_security_group.eks_cluster.id
 
-  #Custom Node SG
+  # Custom Node SG
   node_security_group_id = aws_security_group.eks_nodes.id
 
   # Disable module's default SG creation
-  create_cluster_security_group = false
+  create_security_group = false
   create_node_security_group    = false
 
-  cluster_addons = {
+  addons = {
     coredns    = { most_recent = true }
     kube-proxy = { most_recent = true }
     vpc-cni    = { most_recent = true }
